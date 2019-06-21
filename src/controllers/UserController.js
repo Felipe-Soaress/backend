@@ -10,6 +10,16 @@ const publicKey =
         9rWUTwhBguBzL12BMQIDAQAB
         -----END PUBLIC KEY-----`;
 
+const NodeRSA = require('node-rsa');
+const key = new NodeRSA({b: 512});
+key.setOptions({
+    encryptionScheme: 'pkcs1'
+});
+
+
+
+// const decrypted = key.decrypt(encrypted, 'utf8');
+
 class UserController{
    async store(req,res) {
        try{
