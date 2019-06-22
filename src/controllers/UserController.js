@@ -33,6 +33,21 @@ class UserController{
 
         return res.json(user);
     }
+
+    async showAll(req, res) {
+        console.log(req.query);
+        const users = await User.find({}, function (err, users) {
+            var userMap = {};
+
+            users.forEach(function (user) {
+                userMap[user._id] = user;
+            });
+
+            res.send(userMap);
+        });
+        console.log(users);
+        return res.json(users);
+    }
 }
 
 module.exports = new UserController();
