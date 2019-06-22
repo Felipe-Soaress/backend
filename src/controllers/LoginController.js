@@ -7,7 +7,7 @@ class LoginController {
     // }
 
     async show(req, res) {
-        console.log(req.query);
+        console.log("log:",req.query);
         const login = await User.findOne({ username: req.query.username,
                                             password: req.query.password });
         console.log(login)
