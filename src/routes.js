@@ -18,11 +18,8 @@ routes.get("/boxesAll", BoxController.showAll);
 //Routes Users
 routes.post("/users",UserController.store);
 routes.get("/users/:id",UserController.show);
-<<<<<<< HEAD
 routes.get("/usersAll", UserController.showAll);
-=======
 routes.get("/users", UserController.verifica);
->>>>>>> d74ea85e61d74bdbd1c7c71f6f49ad0d65838285
 
 //Routes Files
 routes.post("/boxes/:id/files", multer(multerConfig).single('file') ,FileController.store);
