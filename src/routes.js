@@ -17,6 +17,7 @@ routes.get("/boxes/:id",BoxController.show);
 //Routes Users
 routes.post("/users",UserController.store);
 routes.get("/users/:id",UserController.show);
+routes.get("/users", UserController.verifica);
 
 //Routes Files
 routes.post("/boxes/:id/files", multer(multerConfig).single('file') ,FileController.store);

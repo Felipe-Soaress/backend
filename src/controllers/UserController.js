@@ -33,6 +33,11 @@ class UserController{
 
         return res.json(user);
     }
+
+    async verifica(req, res) {
+        const login = await User.findOne({ username: req.query.username});
+        return res.json({login: login == null ? true : false});
+    }
 }
 
 module.exports = new UserController();
