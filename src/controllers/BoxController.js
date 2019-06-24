@@ -3,7 +3,7 @@ const Box = require('../models/Box');
 class BoxController{
    async store(req,res) {
     
-
+       console.log("reqqqqqqq",req.body);
        const box = await Box.create(req.body);
         return res.json(box);
     }
@@ -19,7 +19,6 @@ class BoxController{
 
     async showAll(req, res) {
         const box = await Box.find()
-        console.log(box);
         return res.json(box);
     }
 }
