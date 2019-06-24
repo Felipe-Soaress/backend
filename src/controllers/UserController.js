@@ -1,4 +1,5 @@
 const User = require('../models/User');
+const Box = require('../models/Box');
 const CryptoJS = require('crypto-js');
 var crypto = require("crypto");
 const storage = require('node-sessionstorage')
@@ -22,6 +23,16 @@ class UserController{
            const data = JSON.parse(CryptoJS.AES.decrypt(req.body.data.toString(), storage.getItem('keyPrivate')).toString(CryptoJS.enc.Utf8));
            const user = await User.create(data);
            const dataCiphered = CryptoJS.AES.encrypt(JSON.stringify(user), storage.getItem('keyPrivate'));
+            const userId = req.params;
+            console.log(userId);
+            
+            const box = await Box.create(req.body);
+            const newUser = await User.findById(userId);
+            box.user = newUser;
+            await box.save();
+            newUser.box.push(box);
+            await newUser.save();
+
            return res.json({data:dataCiphered.toString()});
        } catch (e) {
            console.log(e);
