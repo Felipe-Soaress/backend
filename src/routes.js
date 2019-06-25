@@ -13,7 +13,7 @@ const HandShakeController = require('./controllers/HandShakeController')
 //Routes Boxes
 routes.post("/boxes",BoxController.store);
 routes.get("/boxes/:id",BoxController.show);
-routes.get("/boxesAll", BoxController.showAll);
+routes.get("/boxesAll/:id", BoxController.showAll);
 
 //Routes Users
 routes.post("/users",UserController.store);

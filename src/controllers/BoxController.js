@@ -27,7 +27,7 @@ class BoxController{
     }
 
     async showAll(req, res) {
-        const box = await Box.find()
+        const box = await Box.find({user:req.params.id})
         return res.json(box);
     }
 }

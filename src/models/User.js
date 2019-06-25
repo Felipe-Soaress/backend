@@ -13,10 +13,7 @@ const User = new mongoose.Schema({
     }, privateKey: {
         type: String,
         required: true,
-    }, boxes: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Box"
-    }]
+    }
 
       
 },{
