@@ -1,4 +1,6 @@
 const Box = require('../models/Box');
+const User = require('../models/User');
+const CryptoJS = require('crypto-js');
 
 const publicKey =
     `-----BEGIN PUBLIC KEY-----
@@ -10,9 +12,10 @@ const publicKey =
 
 class BoxController{
    async store(req,res) {
-    
-       console.log("reqqqqqqq",req.body);
-       const box = await Box.create(req.body);
+    const user = await User.findById(req.body.user);
+       console.log("reqqqqqqq",user);
+       var data = JSON.parse(CryptoJS.enc.Utf8.stringify(CryptoJS.AES.decrypt(req.body.boxNew.toString(),  user.privateKey)));
+        const box = await Box.create(data[0]);
         return res.json(box);
     }
 
