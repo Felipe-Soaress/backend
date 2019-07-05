@@ -13,7 +13,6 @@ const publicKey =
 class BoxController{
    async store(req,res) {
     const user = await User.findById(req.body.user);
-       console.log("reqqqqqqq",user);
        var data = JSON.parse(CryptoJS.enc.Utf8.stringify(CryptoJS.AES.decrypt(req.body.boxNew.toString(),  user.privateKey)));
         const box = await Box.create(data[0]);
         return res.json(box);
@@ -30,8 +29,10 @@ class BoxController{
     }
 
     async showAll(req, res) {
-        const box = await Box.find({user:req.params.id})
-        return res.json(box);
+        const user = await User.findById(req.params.id);     
+        const box = await Box.find({user:req.params.id});
+        var data = CryptoJS.AES.encrypt(JSON.stringify(box), user.privateKey).toString();
+        return res.json(data);
     }
 }
 

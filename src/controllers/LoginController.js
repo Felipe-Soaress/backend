@@ -21,7 +21,8 @@ class LoginController {
         const login = await User.findOne({ username: req.query.username,
                                             password: Pass });
         if(login){
-            return res.json(login);
+            var encripted = {_id: CryptoJS.AES.encrypt(JSON.stringify({_id:login._id}), login.privateKey).toString()};
+            return res.json(encripted);
         }
         return res.json({Existe:true});
     }
