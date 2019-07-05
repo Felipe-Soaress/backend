@@ -2,20 +2,13 @@ const Box = require('../models/Box');
 const User = require('../models/User');
 const CryptoJS = require('crypto-js');
 
-const publicKey =
-    `-----BEGIN PUBLIC KEY-----
-        MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCvslv8UjnU9T3RG6WwJOTJ0EdS
-        AFxMIT6N/eJ704Mh0CkksAD2hdspEJ5Qq07b6DPQcpI5zK1DQqC50vZMnP/hTZlU
-        GbNxoF5JXgZn13ziUq9eL1ACayLBOiywmogG/Icg78vOqmDvaURClMXjARsjHX4X
-        9rWUTwhBguBzL12BMQIDAQAB
-        -----END PUBLIC KEY-----`;
-
 class BoxController{
    async store(req,res) {
     const user = await User.findById(req.body.user);
        var data = JSON.parse(CryptoJS.enc.Utf8.stringify(CryptoJS.AES.decrypt(req.body.boxNew.toString(),  user.privateKey)));
         const box = await Box.create(data[0]);
-        return res.json(box);
+        var encripted = {_id: CryptoJS.AES.encrypt(JSON.stringify({_id:box._id}), user.privateKey).toString()};
+        return res.json(encripted);
     }
 
     async show(req,res){
