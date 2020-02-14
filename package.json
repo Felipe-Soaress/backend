@@ -17,7 +17,7 @@
     "node-sessionstorage": "^1.0.0",
     "passport-publickey": "^1.0.4",
     "socket.io": "^2.2.0",
-    "yarn": "^1.16.0"
+    "yarn": "^1.22.0"
   },
   "devDependencies": {
     "nodemon": "^1.19.1"
